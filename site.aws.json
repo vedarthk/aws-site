@@ -27,6 +27,24 @@
           "RedirectAllRequestsTo": {"Fn::GetAtt": ["S3Bucket", "DomainName"]}
         }
       }
+    },
+    "CloudFrontDistribution": {
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": {
+        "DistributionConfig": {
+          "Enabled": "true",
+          "DefaultRootObject": "index.html",
+          "Origins": [
+            {
+              "DomainName": {"Fn::GetAtt": ["S3Bucket", "DomainName"]},
+              "Id": {"Fn::Join": ["-", {"Ref": "DomainName"}, "origin"]},
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {"Ref": "S3Bucket"}
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }

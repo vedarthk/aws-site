@@ -21,7 +21,7 @@
     "S3BucketWWW": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": {"Fn::Join": [".", ["www", {"Ref": "DomainName"}]]},,
+        "BucketName": {"Fn::Join": [".", ["www", {"Ref": "DomainName"}]]},
         "AccessControl": "PublicRead",
         "WebsiteConfiguration": {
           "RedirectAllRequestsTo": {"Fn::GetAtt": ["S3Bucket", "DomainName"]}
